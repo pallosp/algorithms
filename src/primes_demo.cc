@@ -23,6 +23,6 @@ int main() {
 
   printf("First 20-digit prime: ");
   uint64_t i = 1e19;
-  while (!is_prime_miller_rabin_random(i, 20)) i++;
+  while (!is_prime_miller_rabin(i)) i++;
   printf("%llu\n", i);
 }

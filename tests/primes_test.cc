@@ -2,6 +2,8 @@
 
 #include <gtest/gtest.h>
 
+#include <limits>
+
 namespace {
 
 TEST(Primes, NaiveAlgorithm) {
@@ -18,7 +20,11 @@ TEST(Primes, MillerRabin) {
   EXPECT_TRUE(is_prime_miller_rabin(2));
   EXPECT_TRUE(is_prime_miller_rabin(3));
   EXPECT_FALSE(is_prime_miller_rabin(4));
-  EXPECT_TRUE(is_prime_miller_rabin(INT_MAX));
+  EXPECT_FALSE(is_prime_miller_rabin(2047));  // 23×89
+  EXPECT_FALSE(is_prime_miller_rabin(9'080'191));  // 2131×4261
+  EXPECT_TRUE(is_prime_miller_rabin(std::numeric_limits<int32_t>::max()));
+  EXPECT_TRUE(is_prime_miller_rabin(18'446'744'073'709'551'557llu));
+  EXPECT_FALSE(is_prime_miller_rabin(std::numeric_limits<int64_t>::max()));
 }
 
 TEST(Primes, AlgorithmsAreEquivalent) {
