@@ -5,7 +5,8 @@
 bool is_prime_naive(uint64_t x);
 
 // Deterministic Miller-Rabin algorithm. Selects the witnesses as per
-// https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
+// https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test.
+// Becomes faster than the naive algorithm for x > 200`000`000.
 bool is_prime_miller_rabin(uint32_t x);
 
 // Runs the Miller-Rabin algorithm `attempts` times.
