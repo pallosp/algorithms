@@ -30,4 +30,4 @@ TEST(Primes, AlgorithmsAreEquivalent) {
   }
 }
 
-} // namespace
+}  // namespace
