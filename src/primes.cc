@@ -5,14 +5,14 @@ namespace {
 typedef unsigned __int128 uint128_t;
 
 uint64_t pow_mod(uint64_t base, uint64_t exp, uint64_t mod) {
-  uint128_t r = 1;
+  uint64_t r = 1;
   while (exp) {
     if (exp & 1)
-      r = r * base % mod;
+      r = (uint128_t)r * base % mod;
     base = (uint128_t)base * base % mod;
     exp /= 2;
   }
-  return static_cast<uint64_t>(r);
+  return r;
 }
 
 // Runs the Miller-Rabin algorithm for the given witness (base).
@@ -22,13 +22,13 @@ uint64_t pow_mod(uint64_t base, uint64_t exp, uint64_t mod) {
 bool is_probably_prime(uint64_t x, uint64_t witness) {
   uint64_t exp = x - 1;
   while (exp % 2 == 0)
-    exp >>= 1;
-  uint128_t factor = pow_mod(witness, exp, x);
+    exp /= 2;
+  uint64_t factor = pow_mod(witness, exp, x);
   if (factor == 1 || factor == x - 1)
     return true;
   while (exp < x - 1) {
     exp *= 2;
-    factor = factor * factor % x;
+    factor = (uint128_t)factor * factor % x;
     if (factor == x - 1)
       return true;
   }
