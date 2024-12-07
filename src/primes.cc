@@ -7,7 +7,9 @@ typedef unsigned __int128 uint128_t;
 uint64_t pow_mod(uint64_t base, uint64_t exp, uint64_t mod) {
   uint64_t r = 1;
   while (exp) {
-    if (exp & 1) r = (uint128_t)r * base % mod;
+    if (exp & 1) {
+      r = (uint128_t)r * base % mod;
+    }
     base = (uint128_t)base * base % mod;
     exp /= 2;
   }
