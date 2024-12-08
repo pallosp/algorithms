@@ -47,3 +47,29 @@ bool is_convex_polygon(const std::vector<Point>& vertices, bool strict) {
 
   return exterior_angle_sum == 2;
 }
+
+int point_polygon_relationship(const Point& p,
+                               const std::vector<Point>& vertices) {
+  if (vertices.empty()) return -1;
+
+  Point last = vertices.back();
+  int x = p.x;
+  int y = p.y;
+  int left_edges = 0;  // number of edges to the left of p
+
+  for (const Point& v : vertices) {
+    if (p == v) return 0;
+    const Point& bottom = last.y <= v.y ? last : v;
+    const Point& top = last.y <= v.y ? v : last;
+    if (y >= bottom.y && y < top.y) {
+      int c = triangle_orientation(p, bottom, top);
+      if (c == 0) return 0;
+      if (c > 0) left_edges++;
+    } else if (y == bottom.y && y == top.y) {
+      if ((x > bottom.x && x < top.x) || (x > top.x && x < bottom.x)) return 0;
+    }
+    last = v;
+  }
+
+  return left_edges & 1 ? 1 : -1;
+}
