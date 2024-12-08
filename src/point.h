@@ -1,3 +1,5 @@
+#pragma once
+
 #include <ostream>
 
 // Point on the Euklidean plane.
