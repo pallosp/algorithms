@@ -21,10 +21,10 @@ bool is_convex_polygon(const std::vector<Point>& vertices, bool strict) {
   Point v0 = vertices[n - 2];
   Point v1 = vertices[n - 1];
   int last_orientation = 0;
-  // Negative if 0 ≤ arg(v0→v1) < 180º; 0 if v0 == v1; positive otherwise
-  auto last_angle = v0 <=> v1;
-  // The actual sum is 180º times this value.
-  int exterior_angle_sum = 0;
+  // `less`: upward edge, `greater`: downward edge
+  auto last_edge_dy = std::strong_ordering::equal;
+  // number switches from upward to downward edges or vice versa
+  int edge_dy_switches = 0;
 
   for (const Point& v : vertices) {
     int o = triangle_orientation(v0, v1, v);
@@ -35,17 +35,16 @@ bool is_convex_polygon(const std::vector<Point>& vertices, bool strict) {
       last_orientation = o;
     }
 
-    auto angle = v1 <=> v;
-    if (angle != 0) {
-      exterior_angle_sum += last_angle != 0 && last_angle != angle;
-      last_angle = angle;
+    auto edge_dy = v1 <=> v;
+    if (edge_dy != 0) {
+      edge_dy_switches += last_edge_dy != 0 && last_edge_dy != edge_dy;
+      last_edge_dy = edge_dy;
     }
 
     v0 = v1;
     v1 = v;
   }
-
-  return exterior_angle_sum == 2;
+  return edge_dy_switches <= 2;
 }
 
 int point_polygon_relationship(const Point& p,

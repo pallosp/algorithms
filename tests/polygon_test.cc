@@ -20,11 +20,15 @@ TEST(IsConvexPolygon, Strict) {
   EXPECT_TRUE(is_convex_polygon({{1, 1}})) << "1 point";
 
   EXPECT_TRUE(is_convex_polygon({{1, 1}, {2, 2}})) << "/";
+  EXPECT_TRUE(is_convex_polygon({{0, 0}, {1, 0}})) << "-";
+  EXPECT_TRUE(is_convex_polygon({{0, 0}, {0, 1}})) << "|";
   EXPECT_FALSE(is_convex_polygon({{1, 2}, {1, 2}})) << "p0 == p1";
 
+  EXPECT_FALSE(is_convex_polygon({{0, 0}, {0, 0}, {0, 0}})) << "p0 == p1 == p2";
+  EXPECT_FALSE(is_convex_polygon({{0, 0}, {1, 1}, {0, 0}})) << "p0 == p2";
+  EXPECT_FALSE(is_convex_polygon({{2, 1}, {0, 2}, {0, 2}})) << "p1 == p2";
   EXPECT_TRUE(is_convex_polygon({{0, 0}, {1, 0}, {1, 1}})) << "◺ ↺";
   EXPECT_TRUE(is_convex_polygon({{0, 0}, {1, 1}, {1, 0}})) << "◺ ↻";
-  EXPECT_FALSE(is_convex_polygon({{0, 0}, {1, 1}, {0, 0}})) << "p0 == p2";
 
   EXPECT_TRUE(is_convex_polygon({{0, 0}, {1, 0}, {1, 1}, {0, 1}})) << "□ ↺";
   EXPECT_TRUE(is_convex_polygon({{0, 0}, {0, 1}, {1, 1}, {1, 0}})) << "□ ↻";
@@ -44,11 +48,15 @@ TEST(IsConvexPolygon, Loose) {
   EXPECT_TRUE(is_convex_loose({{1, 1}})) << "1 point";
 
   EXPECT_TRUE(is_convex_loose({{1, 1}, {2, 2}})) << "/";
+  EXPECT_TRUE(is_convex_loose({{0, 0}, {1, 0}})) << "-";
+  EXPECT_TRUE(is_convex_loose({{0, 0}, {0, 1}})) << "|";
   EXPECT_TRUE(is_convex_loose({{1, 2}, {1, 2}})) << "p0 == p1";
 
+  EXPECT_TRUE(is_convex_loose({{0, 0}, {0, 0}, {0, 0}})) << "p0 == p1 == p2";
+  EXPECT_TRUE(is_convex_loose({{0, 0}, {1, 1}, {0, 0}})) << "p0 == p2";
+  EXPECT_TRUE(is_convex_loose({{2, 1}, {0, 2}, {0, 2}})) << "p1 == p2";
   EXPECT_TRUE(is_convex_loose({{0, 0}, {1, 0}, {1, 1}})) << "◺ ↺";
   EXPECT_TRUE(is_convex_loose({{0, 0}, {1, 1}, {1, 0}})) << "◺ ↻";
-  EXPECT_TRUE(is_convex_loose({{0, 0}, {1, 1}, {0, 0}})) << "p0 == p2";
 
   EXPECT_TRUE(is_convex_loose({{0, 0}, {1, 0}, {1, 1}, {0, 1}})) << "□ ↺";
   EXPECT_TRUE(is_convex_loose({{0, 0}, {0, 1}, {1, 1}, {1, 0}})) << "□ ↻";
