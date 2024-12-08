@@ -1,4 +1,13 @@
 cc_test(
+    name = "point_test",
+    srcs = ["point_test.cc"],
+    deps = [
+        "//src:point",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "polygon_test",
     srcs = ["polygon_test.cc"],
     deps = [
