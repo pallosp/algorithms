@@ -6,6 +6,13 @@ cc_library(
 )
 
 cc_library(
+    name = "polygon",
+    srcs = ["polygon.cc"],
+    hdrs = ["polygon.h"],
+    deps = [":point"],
+)
+
+cc_library(
     name = "primes",
     srcs = ["primes.cc"],
     hdrs = ["primes.h"],
