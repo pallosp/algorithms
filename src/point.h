@@ -2,7 +2,7 @@
 
 #include <ostream>
 
-// Point on the Euklidean plane.
+// Point on the Euclidean plane.
 struct Point {
   int x;
   int y;
