@@ -1,4 +1,15 @@
 cc_test(
+    name = "convex_hull_test",
+    srcs = ["convex_hull_test.cc"],
+    deps = [
+        "//src:convex_hull",
+        "//src:point",
+        "//src:polygon",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "point_test",
     srcs = ["point_test.cc"],
     deps = [

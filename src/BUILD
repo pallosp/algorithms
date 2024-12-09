@@ -1,6 +1,16 @@
 package(default_visibility = ["//:__subpackages__"])
 
 cc_library(
+    name = "convex_hull",
+    srcs = ["convex_hull.cc"],
+    hdrs = ["convex_hull.h"],
+    deps = [
+        ":point",
+        ":polygon",
+    ],
+)
+
+cc_library(
     name = "point",
     hdrs = ["point.h"],
 )
