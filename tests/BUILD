@@ -22,6 +22,7 @@ cc_test(
     name = "polygon_test",
     srcs = ["polygon_test.cc"],
     deps = [
+        "//src:point",
         "//src:polygon",
         "@googletest//:gtest_main",
     ],
