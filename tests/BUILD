@@ -10,6 +10,15 @@ cc_test(
 )
 
 cc_test(
+    name = "graph_test",
+    srcs = ["graph_test.cc"],
+    deps = [
+        "//src:graph",
+        "@googletest//:gtest_main",
+    ],
+)
+
+cc_test(
     name = "point_test",
     srcs = ["point_test.cc"],
     deps = [

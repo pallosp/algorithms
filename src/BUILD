@@ -11,6 +11,12 @@ cc_library(
 )
 
 cc_library(
+    name = "graph",
+    srcs = ["graph.cc"],
+    hdrs = ["graph.h"],
+)
+
+cc_library(
     name = "point",
     hdrs = ["point.h"],
 )
